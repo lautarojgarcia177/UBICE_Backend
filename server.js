@@ -32,7 +32,7 @@ app.post("/upload", upload.array("files"), async (req, res) => {
   try {
     const uploadPromises = req.files.map(async (file) => {
       const params = {
-        Bucket: "your-bucket-name",
+        Bucket: process.env.AWS_S3_UPLOAD_BUCKET,
         Key: file.originalname,
         Body: file.buffer,
         ContentType: file.mimetype,
