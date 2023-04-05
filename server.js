@@ -5,14 +5,12 @@ const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
+
 app.use(cors()); // Enable CORS for all routes
 
-// Configure AWS S3 client
-AWS.config.update({
-  region: "your-region",
-  accessKeyId: "your-access-key",
-  secretAccessKey: "your-secret-key",
-});
+// Increase payload size limit
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 // Configure AWS S3 client
 AWS.config.update({
